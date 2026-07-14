@@ -2,11 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Play, RotateCcw, Trophy, HelpCircle, CheckCircle2, XCircle } from "lucide-react";
-import { triviaQuestions, type Question } from "@/lib/trivia-questions";
+import { allTriviaQuestions, type Question } from "@/lib/trivia-questions";
 
-const QUESTION_COUNT = 10;
 const QUESTION_TIME = 15;
-const BEST_SCORE_KEY = "akops-trivia-best-score";
 
 type Status = "intro" | "playing" | "answered" | "finished";
 
@@ -28,7 +26,25 @@ function shuffleQuestion(q: Question): Question {
   };
 }
 
-export default function TriviaQuiz() {
+type Props = {
+  categories?: string[];
+  title?: string;
+  description?: string;
+  questionCount?: number;
+  accentFrom?: string;
+  accentTo?: string;
+  storageKey?: string;
+};
+
+export default function TriviaQuiz({
+  categories,
+  title = "DevOps Trivia Quiz",
+  description,
+  questionCount = 10,
+  accentFrom = "#2563eb",
+  accentTo = "#06b6d4",
+  storageKey = "akops-trivia-best-score",
+}: Props) {
   const [status, setStatus] = useState<Status>("intro");
   const [questions, setQuestions] = useState<Question[]>([]);
   const [index, setIndex] = useState(0);
@@ -38,12 +54,19 @@ export default function TriviaQuiz() {
   const [selected, setSelected] = useState<number | null>(null);
   const [bestScore, setBestScore] = useState<number | null>(null);
 
+  const pool = useMemo(
+    () => (categories && categories.length > 0
+      ? allTriviaQuestions.filter((q) => categories.includes(q.category))
+      : allTriviaQuestions),
+    [categories]
+  );
+
   const current = questions[index];
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(BEST_SCORE_KEY);
+    const stored = window.localStorage.getItem(storageKey);
     if (stored) setBestScore(Number(stored));
-  }, []);
+  }, [storageKey]);
 
   useEffect(() => {
     if (status !== "playing") return;
@@ -57,7 +80,8 @@ export default function TriviaQuiz() {
   }, [status, timeLeft]);
 
   function startQuiz() {
-    const picked = shuffle(triviaQuestions).slice(0, QUESTION_COUNT).map(shuffleQuestion);
+    const count = Math.min(questionCount, pool.length);
+    const picked = shuffle(pool).slice(0, count).map(shuffleQuestion);
     setQuestions(picked);
     setIndex(0);
     setScore(0);
@@ -92,7 +116,7 @@ export default function TriviaQuiz() {
   useEffect(() => {
     if (status === "finished") {
       if (bestScore === null || score > bestScore) {
-        window.localStorage.setItem(BEST_SCORE_KEY, String(score));
+        window.localStorage.setItem(storageKey, String(score));
         setBestScore(score);
       }
     }
@@ -104,18 +128,22 @@ export default function TriviaQuiz() {
     [status, timeLeft]
   );
 
+  const gradient = { backgroundImage: `linear-gradient(to right, ${accentFrom}, ${accentTo})` };
+
   return (
     <div className="card-surface mx-auto max-w-2xl rounded-3xl p-8 sm:p-10">
       {status === "intro" && (
         <div className="text-center">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+          <div
+            className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl"
+            style={{ background: `${accentFrom}1a`, color: accentFrom }}
+          >
             <HelpCircle className="h-6 w-6" />
           </div>
-          <h2 className="mt-5 text-2xl font-extrabold tracking-tight">DevOps Trivia Quiz</h2>
+          <h2 className="mt-5 text-2xl font-extrabold tracking-tight">{title}</h2>
           <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted">
-            {QUESTION_COUNT} random questions on Docker, Kubernetes, CI/CD, Cloud,
-            and Git. {QUESTION_TIME} seconds per question — faster correct answers
-            score more.
+            {description ??
+              `${Math.min(questionCount, pool.length)} questions, ${QUESTION_TIME} seconds each — faster correct answers score more.`}
           </p>
           {bestScore !== null && (
             <p className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
@@ -124,7 +152,8 @@ export default function TriviaQuiz() {
           )}
           <button
             onClick={startQuiz}
-            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35"
+            style={gradient}
+            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-lg hover:shadow-xl"
           >
             <Play className="h-4 w-4" />
             Start Quiz
@@ -142,8 +171,8 @@ export default function TriviaQuiz() {
 
           <div className="mt-3 h-1.5 w-full rounded-full bg-black/[0.06]">
             <div
-              className="h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-1000 ease-linear"
-              style={{ width: `${progressPct}%` }}
+              className="h-1.5 rounded-full transition-all duration-1000 ease-linear"
+              style={{ width: `${progressPct}%`, ...gradient }}
             />
           </div>
 
@@ -177,7 +206,8 @@ export default function TriviaQuiz() {
           {status === "answered" && (
             <button
               onClick={nextQuestion}
-              className="mx-auto mt-6 flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-3 text-sm font-semibold text-white shadow-md hover:shadow-lg"
+              style={gradient}
+              className="mx-auto mt-6 flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md hover:shadow-lg"
             >
               {index + 1 >= questions.length ? "See results" : "Next question"}
             </button>
