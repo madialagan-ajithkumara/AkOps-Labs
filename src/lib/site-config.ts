@@ -194,3 +194,46 @@ export const successStories = [
       "I started with the AKOps Tamil YouTube series knowing nothing about DevOps. A year later I'm running Kubernetes clusters in production.",
   },
 ];
+
+export const playgroundGames = [
+  {
+    slug: "pipeline-speed-run",
+    name: "Pipeline Speed-Run",
+    description: "Race the clock to build a CI/CD pipeline in the correct order across 3 levels.",
+    icon: "Timer",
+    tag: "Speed",
+    color: "#0f9d58",
+  },
+  {
+    slug: "bug-squash",
+    name: "Bug Squash",
+    description: "Click bugs before they cause an outage. Gets faster every round — how long can you last?",
+    icon: "Bug",
+    tag: "Reflex",
+    color: "#dc2626",
+  },
+  {
+    slug: "trivia-quiz",
+    name: "DevOps Trivia Quiz",
+    description: "Timed multiple-choice questions on Docker, Kubernetes, CI/CD, Cloud, and Git.",
+    icon: "HelpCircle",
+    tag: "Knowledge",
+    color: "#2563eb",
+  },
+  {
+    slug: "memory-match",
+    name: "Icon Memory Match",
+    description: "Flip and match pairs of DevOps tool icons. Fewer moves, higher score.",
+    icon: "LayoutGrid",
+    tag: "Casual",
+    color: "#db2777",
+  },
+  {
+    slug: "config-debug",
+    name: "Config Debug Challenge",
+    description: "Spot the broken line in real YAML and Dockerfile snippets before time runs out.",
+    icon: "FileWarning",
+    tag: "Advanced",
+    color: "#ea580c",
+  },
+];

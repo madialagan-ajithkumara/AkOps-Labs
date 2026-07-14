@@ -1,62 +1,73 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Badge from "@/components/ui/Badge";
-import Card from "@/components/ui/Card";
-import PipelineGame from "@/components/game/PipelineGame";
-import { Gauge, Timer, Trophy } from "lucide-react";
+import { playgroundGames } from "@/lib/site-config";
+import { Timer, Bug, HelpCircle, LayoutGrid, FileWarning, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Playground — Pipeline Speed-Run Game",
+  title: "Playground — DevOps Games",
   description:
-    "Test your DevOps knowledge with the AkOps Labs Playground: race the clock to build a CI/CD pipeline in the correct order.",
+    "Five small DevOps games from AkOps Labs: Pipeline Speed-Run, Bug Squash, DevOps Trivia Quiz, Icon Memory Match, and Config Debug Challenge.",
 };
 
-export default function PlaygroundPage() {
+const icons = { Timer, Bug, HelpCircle, LayoutGrid, FileWarning };
+
+export default function PlaygroundHub() {
   return (
     <>
       <section className="relative overflow-hidden border-b border-black/5">
         <div className="hero-blobs">
           <div className="blob blob-mint" />
           <div className="blob blob-sky" />
+          <div className="blob blob-peach" />
         </div>
         <Container className="relative py-20 text-center">
           <Badge>AkOps Playground</Badge>
           <h1 className="mx-auto mt-6 max-w-2xl text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Pipeline Speed-Run
+            Small games. Real DevOps skills.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">
-            Think you know CI/CD? Race the clock and put the pipeline stages in
-            the right order — three levels, real DevOps stages, no partial credit.
+            Five quick games to test your speed, reflexes, and knowledge — pick
+            one and see how you score.
           </p>
         </Container>
       </section>
 
       <section className="py-20">
         <Container>
-          <PipelineGame />
-
-          <div className="mx-auto mt-16 grid max-w-3xl gap-6 sm:grid-cols-3">
-            <Card>
-              <Timer className="h-5 w-5 text-accent" />
-              <h3 className="mt-3 text-sm font-bold">Beat the clock</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-muted">
-                Each level has a shrinking time budget — mistakes cost you seconds.
-              </p>
-            </Card>
-            <Card>
-              <Gauge className="h-5 w-5 text-accent" />
-              <h3 className="mt-3 text-sm font-bold">Three difficulty levels</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-muted">
-                From a basic 5-stage pipeline to a full production release flow.
-              </p>
-            </Card>
-            <Card>
-              <Trophy className="h-5 w-5 text-accent" />
-              <h3 className="mt-3 text-sm font-bold">Chase your best score</h3>
-              <p className="mt-1.5 text-xs leading-relaxed text-muted">
-                Your top score is saved locally in your browser — come back and beat it.
-              </p>
-            </Card>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {playgroundGames.map((g) => {
+              const GameIcon = icons[g.icon as keyof typeof icons];
+              return (
+                <Link
+                  key={g.slug}
+                  href={`/playground/${g.slug}`}
+                  className="card-surface group flex flex-col rounded-2xl p-6 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="flex items-center justify-between">
+                    <div
+                      className="flex h-11 w-11 items-center justify-center rounded-xl"
+                      style={{ background: `${g.color}1a`, color: g.color }}
+                    >
+                      <GameIcon className="h-5 w-5" />
+                    </div>
+                    <span
+                      className="rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide"
+                      style={{ background: `${g.color}1a`, color: g.color }}
+                    >
+                      {g.tag}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-lg font-bold">{g.name}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{g.description}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
+                    Play now
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </Container>
       </section>
