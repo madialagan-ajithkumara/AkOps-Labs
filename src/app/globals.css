@@ -1,21 +1,53 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-background: #ffffff;
-  --color-surface: #f3f8f5;
-  --color-surface-2: #eaf3ee;
-  --color-border: #e3e9e5;
-  --color-foreground: #0f1f19;
-  --color-muted: #5b6b64;
-  --color-accent: #0f9d58;
-  --color-accent-2: #f5a524;
-  --color-accent-soft: #0f9d5814;
-  --font-sans: var(--font-brand);
-  --font-brand: "Poppins", ui-sans-serif, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Runtime variables — these actually change when .dark is toggled */
+:root {
+  --fg-background: #f8fafc;
+  --fg-surface: #ffffff;
+  --fg-surface-2: #f1f5f9;
+  --fg-border: #e2e8f0;
+  --fg-hairline: rgba(11, 18, 32, 0.1);
+  --fg-tint: rgba(11, 18, 32, 0.04);
+  --fg-foreground: #0b1220;
+  --fg-muted: #5b6472;
+  --fg-accent-soft: #00c8531a;
+  color-scheme: light;
 }
 
-:root {
-  color-scheme: light;
+.dark {
+  --fg-background: #0f172a;
+  --fg-surface: #111827;
+  --fg-surface-2: #1a2436;
+  --fg-border: #263145;
+  --fg-hairline: rgba(248, 250, 252, 0.1);
+  --fg-tint: rgba(248, 250, 252, 0.05);
+  --fg-foreground: #f8fafc;
+  --fg-muted: #94a3b8;
+  --fg-accent-soft: #00c85326;
+  color-scheme: dark;
+}
+
+/* Theme tokens — Tailwind inlines these var() references into every
+   utility (text-foreground, bg-background, border-hairline, etc), so the
+   utilities stay reactive to the runtime variables above at all times. */
+@theme inline {
+  --color-background: var(--fg-background);
+  --color-surface: var(--fg-surface);
+  --color-surface-2: var(--fg-surface-2);
+  --color-border: var(--fg-border);
+  --color-hairline: var(--fg-hairline);
+  --color-tint: var(--fg-tint);
+  --color-foreground: var(--fg-foreground);
+  --color-muted: var(--fg-muted);
+  --color-primary: #0f172a;
+  --color-secondary: #111827;
+  --color-accent: #00c853;
+  --color-accent-2: #f59e0b;
+  --color-accent-soft: var(--fg-accent-soft);
+  --font-sans: var(--font-brand);
+  --font-brand: "Poppins", ui-sans-serif, "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
 }
 
 html {
@@ -23,38 +55,39 @@ html {
 }
 
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background: var(--fg-background);
+  color: var(--fg-foreground);
   font-family: var(--font-brand);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(15, 157, 88, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 157, 88, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 200, 83, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 200, 83, 0.06) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
 .glow {
-  background: radial-gradient(700px circle at var(--x, 50%) var(--y, 0%), rgba(15, 157, 88, 0.08), transparent 60%);
+  background: radial-gradient(700px circle at var(--x, 50%) var(--y, 0%), rgba(0, 200, 83, 0.08), transparent 60%);
 }
 
 .text-gradient {
-  background: linear-gradient(90deg, #0f9d58, #17b978 55%, #f5a524 100%);
+  background: linear-gradient(90deg, #00c853, #17b978 55%, #f59e0b 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .card-surface {
-  background: #ffffff;
-  border: 1px solid var(--color-border);
-  box-shadow: 0 1px 2px rgba(15, 31, 25, 0.04), 0 8px 24px -12px rgba(15, 31, 25, 0.08);
+  background: var(--fg-surface);
+  border: 1px solid var(--fg-border);
+  box-shadow: 0 1px 2px rgba(11, 18, 32, 0.04), 0 8px 24px -12px rgba(11, 18, 32, 0.08);
 }
 
 ::selection {
-  background: rgba(15, 157, 88, 0.2);
+  background: rgba(0, 200, 83, 0.2);
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -73,7 +106,11 @@ body {
   position: absolute;
   border-radius: 9999px;
   filter: blur(60px);
-  opacity: 0.55;
+  opacity: 0.5;
+}
+
+.dark .blob {
+  opacity: 0.22;
 }
 
 .blob-mint {
@@ -116,9 +153,9 @@ body {
   align-items: center;
   gap: 0.625rem;
   border-radius: 9999px;
-  border: 1.5px solid rgba(15, 157, 88, 0.35);
-  background: rgba(15, 157, 88, 0.06);
-  color: var(--color-accent);
+  border: 1.5px solid rgba(0, 200, 83, 0.35);
+  background: rgba(0, 200, 83, 0.06);
+  color: #00c853;
   padding: 0.75rem 1.5rem;
   font-size: 0.9rem;
   font-weight: 600;
@@ -127,9 +164,9 @@ body {
 }
 
 .btn-pill:hover {
-  border-color: rgba(15, 157, 88, 0.7);
-  background: rgba(15, 157, 88, 0.12);
-  box-shadow: 0 8px 20px -6px rgba(15, 157, 88, 0.35);
+  border-color: rgba(0, 200, 83, 0.7);
+  background: rgba(0, 200, 83, 0.12);
+  box-shadow: 0 8px 20px -6px rgba(0, 200, 83, 0.35);
 }
 
 /* ---------- Game ---------- */
@@ -143,4 +180,9 @@ body {
 
 .animate-shake {
   animation: shake 0.4s ease-in-out;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
 }

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Play, RotateCcw, Trophy, Timer as TimerIcon, CheckCircle2, XCircle } from "lucide-react";
 import { pipelineLevels } from "@/lib/pipeline-levels";
+import { addXp } from "@/lib/progress";
 
 type Status = "intro" | "playing" | "level-complete" | "finished";
 
@@ -108,6 +109,7 @@ export default function PipelineGame() {
         window.localStorage.setItem(BEST_SCORE_KEY, String(totalScore));
         setBestScore(totalScore);
       }
+      addXp(Math.max(20, Math.round(totalScore / 10)), "pipeline-speed-run");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
@@ -158,7 +160,7 @@ export default function PipelineGame() {
             </div>
           </div>
 
-          <div className="mt-3 h-1.5 w-full rounded-full bg-black/[0.06]">
+          <div className="mt-3 h-1.5 w-full rounded-full bg-tint">
             <div
               className="h-1.5 rounded-full bg-gradient-to-r from-accent to-accent-2 transition-all duration-1000 ease-linear"
               style={{ width: `${progressPct}%` }}
@@ -167,7 +169,7 @@ export default function PipelineGame() {
 
           <div className="mt-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-muted">Your pipeline</p>
-            <div className="mt-2 flex flex-wrap gap-2 rounded-xl border border-dashed border-black/10 bg-black/[0.02] p-3 min-h-[52px]">
+            <div className="mt-2 flex flex-wrap gap-2 rounded-xl border border-dashed border-hairline bg-tint p-3 min-h-[52px]">
               {placed.length === 0 && (
                 <span className="text-xs text-muted">Click stages below to build the pipeline in order...</span>
               )}
@@ -190,7 +192,7 @@ export default function PipelineGame() {
                 <button
                   key={id}
                   onClick={() => handlePick(id)}
-                  className={`rounded-xl border border-black/10 bg-white px-4 py-3 text-sm font-semibold text-foreground shadow-sm transition-all hover:border-accent/50 hover:shadow-md ${
+                  className={`rounded-xl border border-hairline bg-surface px-4 py-3 text-sm font-semibold text-foreground shadow-sm transition-all hover:border-accent/50 hover:shadow-md ${
                     shakeId === id ? "animate-shake border-red-300 bg-red-50 text-red-600" : ""
                   }`}
                 >
@@ -238,14 +240,14 @@ export default function PipelineGame() {
           )}
           <div className="mt-6 flex flex-wrap justify-center gap-3 text-xs text-muted">
             {levelScores.map((s, i) => (
-              <span key={i} className="rounded-full border border-black/10 px-3 py-1">
+              <span key={i} className="rounded-full border border-hairline px-3 py-1">
                 Level {i + 1}: {s}
               </span>
             ))}
           </div>
           <button
             onClick={restart}
-            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-foreground hover:border-accent/40 hover:text-accent"
+            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:border-accent/40 hover:text-accent"
           >
             <RotateCcw className="h-4 w-4" />
             Play Again

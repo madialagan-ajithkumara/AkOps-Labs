@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Badge from "@/components/ui/Badge";
-import { Gamepad2, ListChecks, ArrowRight, Flame } from "lucide-react";
+import { Gamepad2, ListChecks, ArrowRight, Flame, Trophy } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Playground — DevOps Games & Daily Tasks",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function PlaygroundHub() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="hero-blobs">
           <div className="blob blob-mint" />
           <div className="blob blob-sky" />
@@ -69,6 +69,16 @@ export default function PlaygroundHub() {
                 <Flame className="h-3.5 w-3.5" />
                 Start today's task
               </span>
+            </Link>
+          </div>
+
+          <div className="mx-auto mt-8 max-w-4xl text-center">
+            <Link
+              href="/playground/progress"
+              className="inline-flex items-center gap-2 rounded-full border border-hairline px-5 py-2.5 text-sm font-semibold text-muted hover:border-accent/40 hover:text-accent"
+            >
+              <Trophy className="h-4 w-4" />
+              View your level, XP &amp; achievements
             </Link>
           </div>
         </Container>

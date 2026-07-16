@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Flame, CheckCircle2, Circle, Clock, Sparkles } from "lucide-react";
 import { dailyTasks } from "@/lib/daily-tasks";
+import { addXp } from "@/lib/progress";
 
 const STREAK_KEY = "akops-task-streak";
 const COMPLETED_KEY = "akops-task-completed-ids";
@@ -51,6 +52,7 @@ export default function DailyTask() {
     setStreak(next);
     window.localStorage.setItem(STREAK_KEY, JSON.stringify(next));
     toggleCompleted(todayTask.id, true);
+    addXp(40 + nextStreak * 5, "daily-task");
   }
 
   function toggleCompleted(id: string, forceOn?: boolean) {
@@ -88,11 +90,11 @@ export default function DailyTask() {
           >
             {todayTask.difficulty}
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-black/[0.04] px-2.5 py-1 text-muted">
+          <span className="inline-flex items-center gap-1 rounded-full bg-tint px-2.5 py-1 text-muted">
             <Clock className="h-3.5 w-3.5" />
             ~{todayTask.estMinutes} min
           </span>
-          <span className="rounded-full bg-black/[0.04] px-2.5 py-1 text-muted">{todayTask.category}</span>
+          <span className="rounded-full bg-tint px-2.5 py-1 text-muted">{todayTask.category}</span>
         </div>
 
         <button
@@ -141,8 +143,8 @@ export default function DailyTask() {
                     >
                       {task.difficulty}
                     </span>
-                    <span className="rounded-full bg-black/[0.04] px-2 py-0.5 text-muted">{task.category}</span>
-                    <span className="rounded-full bg-black/[0.04] px-2 py-0.5 text-muted">~{task.estMinutes}m</span>
+                    <span className="rounded-full bg-tint px-2 py-0.5 text-muted">{task.category}</span>
+                    <span className="rounded-full bg-tint px-2 py-0.5 text-muted">~{task.estMinutes}m</span>
                   </div>
                 </div>
               </button>

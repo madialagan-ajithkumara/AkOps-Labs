@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import XpToast from "@/components/ui/XpToast";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -47,11 +48,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="bg-background text-foreground antialiased font-sans">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('akops-theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+          }}
+        />
+      </head>
+      <body className="bg-background text-foreground antialiased font-sans" suppressHydrationWarning>
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <XpToast />
       </body>
     </html>
   );

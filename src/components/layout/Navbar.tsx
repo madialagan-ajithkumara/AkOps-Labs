@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, Sparkles } from "lucide-react";
 import Container from "@/components/ui/Container";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { mainNav, siteConfig } from "@/lib/site-config";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-black/5 bg-background/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-hairline bg-background/85 backdrop-blur-md">
       <Container className="flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 text-lg font-extrabold tracking-tight">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-accent to-accent-2 text-sm font-bold text-white">
@@ -32,9 +33,10 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggle />
           <Link
             href="/contact"
-            className="inline-flex items-center rounded-full border border-black/10 px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-accent/40 hover:text-accent"
+            className="inline-flex items-center rounded-full border border-hairline px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-accent/40 hover:text-accent"
           >
             Get in touch
           </Link>
@@ -49,24 +51,27 @@ export default function Navbar() {
           </a>
         </div>
 
-        <button
-          className="text-foreground lg:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            className="text-foreground"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </Container>
 
       {open && (
-        <div className="border-t border-black/5 bg-background lg:hidden">
+        <div className="border-t border-hairline bg-background lg:hidden">
           <Container className="flex flex-col gap-1 py-4">
             {mainNav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-semibold text-muted hover:bg-black/[0.03] hover:text-foreground"
+                className="rounded-lg px-3 py-2.5 text-sm font-semibold text-muted hover:bg-tint hover:text-foreground"
               >
                 {item.label}
               </Link>

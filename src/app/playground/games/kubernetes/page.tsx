@@ -2,19 +2,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Badge from "@/components/ui/Badge";
-import BugSquash from "@/components/game/BugSquash";
+import TerminalChallenge from "@/components/game/TerminalChallenge";
 import TriviaQuiz from "@/components/game/TriviaQuiz";
 import { ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Kubernetes Games — AkOps Playground",
-  description: "Kubernetes-themed games: Bug Squash and a Kubernetes trivia sprint.",
+  description: "Kubernetes-themed games: a real kubectl Terminal Challenge and a Kubernetes trivia sprint.",
 };
 
 export default function KubernetesGamesPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="hero-blobs">
           <div className="blob blob-sky" />
         </div>
@@ -28,8 +28,8 @@ export default function KubernetesGamesPage() {
             Kubernetes Games
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">
-            Squash bugs before they take down your cluster, then test your Pods,
-            Deployments, and Services knowledge.
+            Type real kubectl commands to fix a live cluster incident, then test
+            your Pods, Deployments, and Services knowledge.
           </p>
         </Container>
       </section>
@@ -37,8 +37,8 @@ export default function KubernetesGamesPage() {
       <section className="py-16">
         <Container className="space-y-16">
           <div>
-            <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-widest text-muted">Featured — Bug Squash</h2>
-            <BugSquash />
+            <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-widest text-muted">Featured — Terminal Challenge</h2>
+            <TerminalChallenge />
           </div>
           <div>
             <h2 className="mb-6 text-center text-sm font-bold uppercase tracking-widest text-muted">Kubernetes Trivia Sprint</h2>

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function YoutubePage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="glow absolute inset-0" />
         <Container className="relative py-24 text-center">
           <Badge>AkOps YouTube</Badge>
@@ -36,13 +36,13 @@ export default function YoutubePage() {
         </Container>
       </section>
 
-      <section className="border-b border-black/5 py-24">
+      <section className="border-b border-hairline py-24">
         <Container>
           <SectionHeading eyebrow="Series" title="Content organized around how engineers actually learn." align="center" />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {youtubeSeries.map((y) => (
               <Card key={y.name}>
-                <div className="flex aspect-video items-center justify-center rounded-lg bg-black/[0.04]">
+                <div className="flex aspect-video items-center justify-center rounded-lg bg-tint">
                   <PlayCircle className="h-10 w-10 text-accent" />
                 </div>
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent mt-4">

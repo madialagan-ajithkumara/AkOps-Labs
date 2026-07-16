@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function TriviaQuizPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="hero-blobs">
           <div className="blob blob-sky" />
         </div>

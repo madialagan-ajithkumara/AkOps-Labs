@@ -35,7 +35,7 @@ const columns = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-black/5 bg-surface">
+    <footer className="border-t border-hairline bg-surface">
       <Container className="py-16">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2">
@@ -80,7 +80,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-black/5 pt-8 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-hairline pt-8 sm:flex-row">
           <p className="text-xs text-muted">
             © {new Date().getFullYear()} AkOps Labs. All rights reserved.
           </p>

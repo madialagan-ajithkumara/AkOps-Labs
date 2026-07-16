@@ -24,7 +24,7 @@ const steps = [
 export default function ResumeAiPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="glow absolute inset-0" />
         <Container className="relative py-24">
           <div className="mx-auto max-w-3xl text-center">
@@ -53,7 +53,7 @@ export default function ResumeAiPage() {
       </section>
 
       {/* Product features */}
-      <section className="border-b border-black/5 py-24">
+      <section className="border-b border-hairline py-24">
         <Container>
           <SectionHeading
             eyebrow="What it does"
@@ -76,7 +76,7 @@ export default function ResumeAiPage() {
       </section>
 
       {/* How it works */}
-      <section className="border-b border-black/5 py-24">
+      <section className="border-b border-hairline py-24">
         <Container>
           <SectionHeading eyebrow="How it works" title="From upload to offer, in four steps." align="center" />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -92,11 +92,11 @@ export default function ResumeAiPage() {
       </section>
 
       {/* Score preview + why it matters */}
-      <section className="border-b border-black/5 py-24">
+      <section className="border-b border-hairline py-24">
         <Container>
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="card-surface rounded-2xl p-8">
-              <div className="flex items-center justify-between border-b border-black/5 pb-4">
+              <div className="flex items-center justify-between border-b border-hairline pb-4">
                 <span className="text-sm font-medium text-muted">ATS Compatibility Score</span>
                 <span className="text-2xl font-semibold text-gradient">94%</span>
               </div>
@@ -107,7 +107,7 @@ export default function ResumeAiPage() {
                       <span>{row}</span>
                       <span>{[92, 88, 97, 90][i]}%</span>
                     </div>
-                    <div className="mt-1.5 h-1.5 w-full rounded-full bg-black/[0.04]">
+                    <div className="mt-1.5 h-1.5 w-full rounded-full bg-tint">
                       <div
                         className="h-1.5 rounded-full bg-gradient-to-r from-accent to-accent-2"
                         style={{ width: `${[92, 88, 97, 90][i]}%` }}

@@ -48,7 +48,7 @@ export default function ContactPage() {
                       name="name"
                       type="text"
                       required
-                      className="w-full rounded-lg border border-black/10 bg-black/[0.04] px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none"
+                      className="w-full rounded-lg border border-hairline bg-tint px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none"
                       placeholder="Jane Doe"
                     />
                   </div>
@@ -61,7 +61,7 @@ export default function ContactPage() {
                       name="email"
                       type="email"
                       required
-                      className="w-full rounded-lg border border-black/10 bg-black/[0.04] px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none"
+                      className="w-full rounded-lg border border-hairline bg-tint px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none"
                       placeholder="jane@company.com"
                     />
                   </div>
@@ -74,7 +74,7 @@ export default function ContactPage() {
                     id="company"
                     name="company"
                     type="text"
-                    className="w-full rounded-lg border border-black/10 bg-black/[0.04] px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none"
+                    className="w-full rounded-lg border border-hairline bg-tint px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none"
                     placeholder="Acme Inc."
                   />
                 </div>
@@ -85,7 +85,7 @@ export default function ContactPage() {
                   <select
                     id="reason"
                     name="reason"
-                    className="w-full rounded-lg border border-black/10 bg-black/[0.04] px-4 py-2.5 text-sm text-foreground focus:border-accent focus:outline-none"
+                    className="w-full rounded-lg border border-hairline bg-tint px-4 py-2.5 text-sm text-foreground focus:border-accent focus:outline-none"
                   >
                     {reasons.map((r) => (
                       <option key={r} value={r} className="bg-surface">
@@ -103,13 +103,13 @@ export default function ContactPage() {
                     name="message"
                     rows={5}
                     required
-                    className="w-full rounded-lg border border-black/10 bg-black/[0.04] px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none"
+                    className="w-full rounded-lg border border-hairline bg-tint px-4 py-2.5 text-sm text-foreground placeholder:text-muted/60 focus:border-accent focus:outline-none"
                     placeholder="Tell us a bit about what you're looking for..."
                   />
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-semibold text-background transition-colors hover:bg-white sm:w-auto"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-semibold text-background transition-colors hover:opacity-90 sm:w-auto"
                 >
                   Send message
                   <Send className="h-4 w-4" />

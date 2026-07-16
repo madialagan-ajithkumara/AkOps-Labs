@@ -33,7 +33,7 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="glow absolute inset-0" />
         <Container className="relative py-24 text-center">
           <Badge>About AkOps Labs</Badge>
@@ -48,7 +48,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="border-b border-black/5 py-24">
+      <section className="border-b border-hairline py-24">
         <Container>
           <div className="mx-auto max-w-3xl">
             <SectionHeading eyebrow="Our Story" title="From consulting practice to full ecosystem." />
@@ -78,7 +78,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="border-b border-black/5 py-24">
+      <section className="border-b border-hairline py-24">
         <Container>
           <SectionHeading eyebrow="What we believe" title="The principles behind everything we build." align="center" />
           <div className="mt-12 grid gap-6 sm:grid-cols-3">

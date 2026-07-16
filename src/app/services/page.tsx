@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="glow absolute inset-0" />
         <Container className="relative py-24 text-center">
           <Badge>AkOps Consulting</Badge>
@@ -62,7 +62,7 @@ export default function ServicesPage() {
                 </ul>
               </div>
               <Card className={i % 2 === 1 ? "lg:order-1" : ""}>
-                <div className="flex items-center justify-between border-b border-black/5 pb-4">
+                <div className="flex items-center justify-between border-b border-hairline pb-4">
                   <span className="text-sm font-medium text-muted">Engagement Model</span>
                   <span className="text-xs text-accent">Custom scoped</span>
                 </div>
@@ -78,7 +78,7 @@ export default function ServicesPage() {
         </Container>
       </section>
 
-      <section className="border-t border-black/5 py-24">
+      <section className="border-t border-hairline py-24">
         <Container>
           <SectionHeading
             eyebrow="How we work"
@@ -102,7 +102,7 @@ export default function ServicesPage() {
         </Container>
       </section>
 
-      <section className="border-t border-black/5 py-24">
+      <section className="border-t border-hairline py-24">
         <Container>
           <div className="card-surface rounded-3xl px-8 py-16 text-center sm:px-16">
             <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">

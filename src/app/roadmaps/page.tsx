@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function RoadmapsPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="hero-blobs">
           <div className="blob blob-mint" />
           <div className="blob blob-peach" />
@@ -45,7 +45,7 @@ export default function RoadmapsPage() {
                 </div>
                 <h3 className="mt-4 text-lg font-bold">{r.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{r.description}</p>
-                <ol className="mt-5 space-y-2.5 border-t border-black/5 pt-5">
+                <ol className="mt-5 space-y-2.5 border-t border-hairline pt-5">
                   {r.steps.map((step, i) => (
                     <li key={step} className="flex items-start gap-3 text-sm text-muted">
                       <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-accent-soft text-[11px] font-bold text-accent">
@@ -67,7 +67,7 @@ export default function RoadmapsPage() {
         </Container>
       </section>
 
-      <section className="border-t border-black/5 py-24">
+      <section className="border-t border-hairline py-24">
         <Container>
           <SectionHeading eyebrow="Why follow a roadmap" title="Learning in the right order matters." align="center" />
           <div className="mt-12 grid gap-6 sm:grid-cols-3">

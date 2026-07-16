@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function AcademyPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="glow absolute inset-0" />
         <Container className="relative py-24 text-center">
           <Badge>AkOps Academy</Badge>
@@ -36,7 +36,7 @@ export default function AcademyPage() {
         </Container>
       </section>
 
-      <section className="border-b border-black/5 py-24">
+      <section className="border-b border-hairline py-24">
         <Container>
           <div className="grid gap-6 sm:grid-cols-2">
             {academyPrograms.map((p) => (
@@ -46,7 +46,7 @@ export default function AcademyPage() {
                 </div>
                 <h3 className="mt-4 text-lg font-semibold">{p.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{p.description}</p>
-                <ul className="mt-5 space-y-2.5 border-t border-black/5 pt-5">
+                <ul className="mt-5 space-y-2.5 border-t border-hairline pt-5">
                   {p.items.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-muted">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
@@ -60,7 +60,7 @@ export default function AcademyPage() {
         </Container>
       </section>
 
-      <section className="border-b border-black/5 py-24">
+      <section className="border-b border-hairline py-24">
         <Container>
           <SectionHeading eyebrow="Why AkOps Academy" title="Built by consultants who ship production systems." align="center" />
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
@@ -80,7 +80,7 @@ export default function AcademyPage() {
 
 
       {/* Success Stories */}
-      <section className="border-b border-black/5 py-24">
+      <section className="border-b border-hairline py-24">
         <Container>
           <SectionHeading eyebrow="Success Stories" title="Real people, real outcomes." align="center" />
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
@@ -88,7 +88,7 @@ export default function AcademyPage() {
               <Card key={s.name}>
                 <Quote className="h-5 w-5 text-accent" />
                 <p className="mt-4 text-sm leading-relaxed text-muted">&ldquo;{s.quote}&rdquo;</p>
-                <div className="mt-5 border-t border-black/5 pt-4">
+                <div className="mt-5 border-t border-hairline pt-4">
                   <p className="text-sm font-bold text-foreground">{s.name}</p>
                   <p className="text-xs text-muted">{s.role}</p>
                 </div>

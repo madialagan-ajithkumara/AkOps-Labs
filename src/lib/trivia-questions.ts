@@ -439,4 +439,141 @@ export const moreTriviaQuestions: Question[] = [
   },
 ];
 
-export const allTriviaQuestions: Question[] = [...triviaQuestions, ...moreTriviaQuestions];
+export const scenarioQuestions: Question[] = [
+  {
+    id: "sim1",
+    question: "Your test suite is flaky and randomly blocking releases. What's the best first step?",
+    options: [
+      "Delete the flaky tests",
+      "Quarantine the flaky tests and investigate root cause separately from blocking releases",
+      "Ignore all test failures going forward",
+      "Run tests less often",
+    ],
+    correctIndex: 1,
+    category: "CI/CD Simulator",
+  },
+  {
+    id: "sim2",
+    question: "A deploy just caused a spike in errors. What's the fastest safe response?",
+    options: [
+      "Wait and see if it resolves itself",
+      "Roll back to the last known-good deployment",
+      "Deploy a hotfix immediately without testing",
+      "Restart all servers",
+    ],
+    correctIndex: 1,
+    category: "CI/CD Simulator",
+  },
+  {
+    id: "sim3",
+    question: "You want to reduce risk when releasing a major feature to all users at once. What should you do?",
+    options: [
+      "Deploy to 100% of users immediately",
+      "Use a canary or phased rollout to a small percentage first",
+      "Skip staging and test in production",
+      "Disable monitoring during the release",
+    ],
+    correctIndex: 1,
+    category: "CI/CD Simulator",
+  },
+  {
+    id: "sim4",
+    question: "Your pipeline takes 40 minutes and developers are avoiding running it. What's a high-impact fix?",
+    options: [
+      "Remove all tests",
+      "Parallelize independent test suites and cache dependencies",
+      "Only run the pipeline once a week",
+      "Add more manual approval steps",
+    ],
+    correctIndex: 1,
+    category: "CI/CD Simulator",
+  },
+  {
+    id: "sim5",
+    question: "Secrets are currently hardcoded in your pipeline YAML. What's the correct fix?",
+    options: [
+      "Leave them, it's a private repo",
+      "Move them to a secrets manager and reference them via environment variables",
+      "Base64 encode them in the file",
+      "Email them to the team instead",
+    ],
+    correctIndex: 1,
+    category: "CI/CD Simulator",
+  },
+  {
+    id: "sim6",
+    question: "You need every production change to be traceable and reversible. Which practice supports this best?",
+    options: [
+      "Manual SSH changes on servers",
+      "GitOps — infrastructure and deploys driven from version-controlled Git commits",
+      "Ad hoc scripts run by whoever is online",
+      "Skipping code review for urgent fixes",
+    ],
+    correctIndex: 1,
+    category: "CI/CD Simulator",
+  },
+  {
+    id: "arch1",
+    question: "You need a highly available web app across 2 regions with automatic failover. What's the right building block?",
+    options: [
+      "A single EC2 instance in one region",
+      "Multi-region deployment behind a global load balancer / DNS failover (e.g. Route 53)",
+      "A cron job that restarts the app",
+      "One large database with no replicas",
+    ],
+    correctIndex: 1,
+    category: "Architecture",
+  },
+  {
+    id: "arch2",
+    question: "Your app has unpredictable traffic spikes and you want to avoid over-provisioning. What fits best?",
+    options: [
+      "Fixed-size servers sized for peak traffic year-round",
+      "Auto Scaling Groups that scale compute based on demand",
+      "A single always-on large server",
+      "No scaling, just alert on high CPU",
+    ],
+    correctIndex: 1,
+    category: "Architecture",
+  },
+  {
+    id: "arch3",
+    question: "You want services to communicate asynchronously without tight coupling. What's the right pattern?",
+    options: [
+      "Direct synchronous HTTP calls between every service",
+      "A message queue or event bus (e.g. SQS, Kafka, EventBridge)",
+      "Shared global variables",
+      "Polling a shared spreadsheet",
+    ],
+    correctIndex: 1,
+    category: "Architecture",
+  },
+  {
+    id: "arch4",
+    question: "Which architecture best supports independently deployable, independently scalable services?",
+    options: ["Monolith", "Microservices", "A single shared script", "A static website only"],
+    correctIndex: 1,
+    category: "Architecture",
+  },
+  {
+    id: "arch5",
+    question: "You need to serve static assets globally with low latency. What's the right component?",
+    options: ["A single origin server", "A CDN (e.g. CloudFront)", "A database", "A message queue"],
+    correctIndex: 1,
+    category: "Architecture",
+  },
+  {
+    id: "arch6",
+    question: "Your database is becoming a read bottleneck under heavy traffic. What's a common fix?",
+    options: [
+      "Add read replicas",
+      "Delete old data randomly",
+      "Turn off backups",
+      "Move the database to a single smaller instance",
+    ],
+    correctIndex: 0,
+    category: "Architecture",
+  },
+];
+
+export const allTriviaQuestions: Question[] = [...triviaQuestions, ...moreTriviaQuestions, ...scenarioQuestions];

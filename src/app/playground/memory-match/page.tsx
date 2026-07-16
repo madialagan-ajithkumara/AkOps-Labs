@@ -6,14 +6,14 @@ import MemoryMatch from "@/components/game/MemoryMatch";
 import { ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Icon Memory Match — AkOps Playground",
-  description: "Flip and match pairs of DevOps tool icons in as few moves as possible.",
+  title: "Concept Match — AkOps Playground",
+  description: "Flip and match DevOps terms to their correct definitions in as few moves as possible.",
 };
 
 export default function MemoryMatchPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="hero-blobs">
           <div className="blob blob-mint" />
         </div>
@@ -24,11 +24,11 @@ export default function MemoryMatchPage() {
           </Link>
           <Badge>AkOps Playground</Badge>
           <h1 className="mx-auto mt-6 max-w-2xl text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Icon Memory Match
+            Concept Match
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted">
-            A casual break from the reflex and speed games — flip cards, find
-            pairs, and try to beat your move count.
+            Flip cards to pair each DevOps term with its correct definition.
+            No shape-matching shortcuts — you have to know what each term means.
           </p>
         </Container>
       </section>

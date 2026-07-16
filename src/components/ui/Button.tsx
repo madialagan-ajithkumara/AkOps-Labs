@@ -8,7 +8,7 @@ const variants: Record<Variant, string> = {
   primary:
     "bg-gradient-to-r from-accent to-[#17b978] text-white shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/35 hover:brightness-105",
   secondary:
-    "bg-white text-foreground border border-black/10 hover:border-accent/50 hover:text-accent",
+    "bg-surface text-foreground border border-hairline hover:border-accent/50 hover:text-accent",
   dark: "bg-foreground text-white hover:opacity-90",
   ghost: "text-foreground hover:text-accent",
 };

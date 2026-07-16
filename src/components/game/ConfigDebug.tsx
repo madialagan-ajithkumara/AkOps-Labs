@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Play, RotateCcw, Trophy, FileWarning, CheckCircle2, XCircle } from "lucide-react";
 import { debugSnippets, type Snippet } from "@/lib/debug-snippets";
+import { addXp } from "@/lib/progress";
 
 const ROUND_COUNT = 5;
 const ROUND_TIME = 25;
@@ -85,6 +86,7 @@ export default function ConfigDebug() {
         window.localStorage.setItem(BEST_SCORE_KEY, String(score));
         setBestScore(score);
       }
+      addXp(Math.max(20, Math.round(score / 6)), "config-debug");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
@@ -124,7 +126,7 @@ export default function ConfigDebug() {
             <span>{timeLeft}s</span>
           </div>
 
-          <div className="mt-4 overflow-x-auto rounded-xl border border-black/10 bg-[#0f1712] p-4 font-mono text-xs leading-relaxed">
+          <div className="mt-4 overflow-x-auto rounded-xl border border-hairline bg-[#0f1712] p-4 font-mono text-xs leading-relaxed">
             {current.lines.map((line, i) => {
               let rowClasses = "text-emerald-50/90 hover:bg-white/5";
               if (status === "answered") {
@@ -146,7 +148,7 @@ export default function ConfigDebug() {
           </div>
 
           {status === "answered" && (
-            <div className="mt-4 flex items-start gap-2 rounded-xl border border-black/10 bg-black/[0.02] p-4 text-sm">
+            <div className="mt-4 flex items-start gap-2 rounded-xl border border-hairline bg-tint p-4 text-sm">
               {selectedLine === current.buggyLine ? (
                 <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" />
               ) : (
@@ -184,7 +186,7 @@ export default function ConfigDebug() {
           )}
           <button
             onClick={startGame}
-            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-foreground hover:border-accent/40 hover:text-accent"
+            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:border-accent/40 hover:text-accent"
           >
             <RotateCcw className="h-4 w-4" />
             Play Again

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function AzureGamesPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-black/5">
+      <section className="relative overflow-hidden border-b border-hairline">
         <div className="hero-blobs">
           <div className="blob blob-sky" />
         </div>
@@ -42,7 +42,7 @@ export default function AzureGamesPage() {
             accentTo="#38bdf8"
             storageKey="akops-trivia-azure-best"
           />
-          <div className="mx-auto flex max-w-md items-center gap-3 rounded-2xl border border-dashed border-black/15 p-5 text-center">
+          <div className="mx-auto flex max-w-md items-center gap-3 rounded-2xl border border-dashed border-hairline p-5 text-center">
             <Sparkles className="mx-auto h-5 w-5 text-muted" />
             <p className="text-sm text-muted">A dedicated arcade game for Azure is on the roadmap — for now, the trivia sprint is the fastest way to test yourself.</p>
           </div>

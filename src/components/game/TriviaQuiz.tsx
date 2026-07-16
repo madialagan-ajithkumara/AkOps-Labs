@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Play, RotateCcw, Trophy, HelpCircle, CheckCircle2, XCircle } from "lucide-react";
 import { allTriviaQuestions, type Question } from "@/lib/trivia-questions";
+import { addXp } from "@/lib/progress";
 
 const QUESTION_TIME = 15;
 
@@ -119,6 +120,7 @@ export default function TriviaQuiz({
         window.localStorage.setItem(storageKey, String(score));
         setBestScore(score);
       }
+      addXp(Math.max(20, Math.round(score / 8)), storageKey);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
@@ -169,7 +171,7 @@ export default function TriviaQuiz({
             <span>{timeLeft}s</span>
           </div>
 
-          <div className="mt-3 h-1.5 w-full rounded-full bg-black/[0.06]">
+          <div className="mt-3 h-1.5 w-full rounded-full bg-tint">
             <div
               className="h-1.5 rounded-full transition-all duration-1000 ease-linear"
               style={{ width: `${progressPct}%`, ...gradient }}
@@ -182,11 +184,11 @@ export default function TriviaQuiz({
             {current.options.map((opt, i) => {
               const isCorrect = i === current.correctIndex;
               const isSelected = i === selected;
-              let stateClasses = "border-black/10 bg-white hover:border-accent/40";
+              let stateClasses = "border-hairline bg-surface hover:border-accent/40";
               if (status === "answered") {
                 if (isCorrect) stateClasses = "border-accent bg-accent-soft text-accent";
                 else if (isSelected) stateClasses = "border-red-300 bg-red-50 text-red-600";
-                else stateClasses = "border-black/10 bg-white opacity-60";
+                else stateClasses = "border-hairline bg-surface opacity-60";
               }
               return (
                 <button
@@ -232,7 +234,7 @@ export default function TriviaQuiz({
           )}
           <button
             onClick={startQuiz}
-            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-semibold text-foreground hover:border-accent/40 hover:text-accent"
+            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-surface px-6 py-3 text-sm font-semibold text-foreground hover:border-accent/40 hover:text-accent"
           >
             <RotateCcw className="h-4 w-4" />
             Play Again
