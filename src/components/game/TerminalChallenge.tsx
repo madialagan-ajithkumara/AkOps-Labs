@@ -20,7 +20,7 @@ export default function TerminalChallenge() {
   const [totalXp, setTotalXp] = useState(0);
   const [completedCount, setCompletedCount] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const logEndRef = useRef<HTMLDivElement>(null);
+  const logContainerRef = useRef<HTMLDivElement>(null);
 
   const scenario = terminalScenarios[scenarioIdx];
   const step = scenario?.steps[stepIdx];
@@ -31,11 +31,13 @@ export default function TerminalChallenge() {
   }, []);
 
   useEffect(() => {
-    logEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll only the terminal log container itself, never the page.
+    const el = logContainerRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
   }, [log]);
 
   useEffect(() => {
-    if (status === "playing") inputRef.current?.focus();
+    if (status === "playing") inputRef.current?.focus({ preventScroll: true });
   }, [status, stepIdx, scenarioIdx]);
 
   function startScenario(idx: number) {
@@ -162,7 +164,7 @@ export default function TerminalChallenge() {
           </p>
 
           <div className="mt-4 rounded-xl bg-slate-950 p-4 font-mono text-[13px] shadow-inner">
-            <div className="max-h-64 space-y-1 overflow-y-auto pr-1">
+            <div ref={logContainerRef} className="max-h-64 space-y-1 overflow-y-auto overscroll-contain pr-1">
               {log.map((line, i) => (
                 <div key={i}>
                   {line.kind === "cmd" && (
@@ -181,7 +183,6 @@ export default function TerminalChallenge() {
                   )}
                 </div>
               ))}
-              <div ref={logEndRef} />
             </div>
             <form onSubmit={handleSubmit} className="mt-2 flex items-center gap-2">
               <span className="text-emerald-400">{scenario.prompt} $</span>

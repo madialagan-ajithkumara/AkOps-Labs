@@ -37,26 +37,55 @@ export default function RoadmapsPage() {
 
       <section className="py-24">
         <Container>
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="mx-auto max-w-3xl space-y-16">
             {roadmaps.map((r) => (
               <Card key={r.slug} id={r.slug}>
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
-                  <Icon name={r.icon as any} className="h-5 w-5" />
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
+                    <Icon name={r.icon as any} className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold">{r.name}</h3>
+                    <p className="mt-0.5 text-sm leading-relaxed text-muted">{r.description}</p>
+                  </div>
                 </div>
-                <h3 className="mt-4 text-lg font-bold">{r.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{r.description}</p>
-                <ol className="mt-5 space-y-2.5 border-t border-hairline pt-5">
-                  {r.steps.map((step, i) => (
-                    <li key={step} className="flex items-start gap-3 text-sm text-muted">
-                      <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-accent-soft text-[11px] font-bold text-accent">
-                        {i + 1}
-                      </span>
-                      {step}
-                    </li>
-                  ))}
-                </ol>
+
+                <div className="relative mt-8 pl-3">
+                  <div className="absolute bottom-3 left-6 top-3 w-px bg-hairline" />
+                  <ol className="space-y-6">
+                    {r.steps.map((step, i) => {
+                      const isFirst = i === 0;
+                      const isLast = i === r.steps.length - 1;
+                      return (
+                        <li key={step} className="relative flex items-start gap-4">
+                          <span
+                            className={`relative z-10 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+                              isLast ? "bg-accent text-white" : "bg-accent-soft text-accent"
+                            }`}
+                          >
+                            {i + 1}
+                          </span>
+                          <div>
+                            <p className="text-sm font-semibold text-foreground">{step}</p>
+                            {isFirst && (
+                              <span className="mt-0.5 inline-block text-xs font-bold uppercase tracking-wide text-accent">
+                                Start here
+                              </span>
+                            )}
+                            {isLast && (
+                              <span className="mt-0.5 inline-block text-xs font-bold uppercase tracking-wide text-accent">
+                                Job-ready
+                              </span>
+                            )}
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                </div>
+
                 {r.slug === "career-roadmap" && (
-                  <Button href={siteConfig.resumeAiUrl} external className="mt-6 w-full justify-center">
+                  <Button href={siteConfig.resumeAiUrl} external className="mt-8 w-full justify-center">
                     <Sparkles className="h-4 w-4" />
                     Start with Resume AI
                   </Button>

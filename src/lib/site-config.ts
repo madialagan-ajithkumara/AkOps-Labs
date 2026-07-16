@@ -203,6 +203,7 @@ export const playgroundGames = [
     icon: "Timer",
     tag: "Speed",
     color: "#0f9d58",
+    category: "cicd",
   },
   {
     slug: "terminal-challenge",
@@ -211,6 +212,7 @@ export const playgroundGames = [
     icon: "TerminalSquare",
     tag: "Hands-On",
     color: "#0f172a",
+    category: "kubernetes",
   },
   {
     slug: "trivia-quiz",
@@ -219,6 +221,7 @@ export const playgroundGames = [
     icon: "HelpCircle",
     tag: "Knowledge",
     color: "#2563eb",
+    category: "general",
   },
   {
     slug: "memory-match",
@@ -227,6 +230,7 @@ export const playgroundGames = [
     icon: "LayoutGrid",
     tag: "Knowledge",
     color: "#db2777",
+    category: "general",
   },
   {
     slug: "config-debug",
@@ -235,6 +239,7 @@ export const playgroundGames = [
     icon: "FileWarning",
     tag: "Advanced",
     color: "#ea580c",
+    category: "iac",
   },
   {
     slug: "yaml-battle",
@@ -243,6 +248,7 @@ export const playgroundGames = [
     icon: "Swords",
     tag: "Battle",
     color: "#dc2626",
+    category: "iac",
   },
   {
     slug: "command-ninja",
@@ -251,6 +257,7 @@ export const playgroundGames = [
     icon: "Terminal",
     tag: "Typing",
     color: "#7c3aed",
+    category: "general",
   },
   {
     slug: "terraform-escape-room",
@@ -259,6 +266,7 @@ export const playgroundGames = [
     icon: "DoorOpen",
     tag: "Puzzle",
     color: "#f59e0b",
+    category: "iac",
   },
   {
     slug: "aws-cost-detective",
@@ -267,6 +275,7 @@ export const playgroundGames = [
     icon: "Search",
     tag: "Detective",
     color: "#f59e0b",
+    category: "aws",
   },
   {
     slug: "cicd-simulator",
@@ -275,6 +284,7 @@ export const playgroundGames = [
     icon: "GitBranch",
     tag: "Scenario",
     color: "#0f9d58",
+    category: "cicd",
   },
   {
     slug: "architecture-builder",
@@ -283,6 +293,7 @@ export const playgroundGames = [
     icon: "LayoutGrid",
     tag: "Scenario",
     color: "#2563eb",
+    category: "general",
   },
   {
     slug: "incident-commander",
@@ -291,6 +302,7 @@ export const playgroundGames = [
     icon: "Siren",
     tag: "Scenario",
     color: "#dc2626",
+    category: "kubernetes",
   },
   {
     slug: "k8s-troubleshooting-room",
@@ -299,6 +311,7 @@ export const playgroundGames = [
     icon: "Boxes",
     tag: "Coming Soon",
     color: "#94a3b8",
+    category: "kubernetes",
   },
   {
     slug: "ai-interview-arena",
@@ -307,5 +320,6 @@ export const playgroundGames = [
     icon: "MessagesSquare",
     tag: "Coming Soon",
     color: "#94a3b8",
+    category: "general",
   },
 ];

@@ -36,7 +36,7 @@ export default function K8sTroubleshootingRoomPage() {
           In the meantime, try the Kubernetes games below
         </div>
         <div className="mt-6">
-          <Button href="/playground/games/kubernetes" variant="secondary">Kubernetes Games</Button>
+          <Button href="/playground/games" variant="secondary">Browse Games</Button>
         </div>
       </Container>
     </section>
