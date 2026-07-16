@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
@@ -280,7 +281,19 @@ export default function Home() {
       <section className="border-b border-hairline py-24">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
-            <Badge>Founder</Badge>
+            <div className="mx-auto h-24 w-24 overflow-hidden rounded-full border-4 border-accent-soft shadow-lg">
+              <Image
+                src="/founder.jpg"
+                alt="Ajith Kumar, Founder of AkOps Labs"
+                width={96}
+                height={96}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </div>
+            <div className="mt-6">
+              <Badge>Founder</Badge>
+            </div>
             <h2 className="mt-5 text-3xl font-extrabold tracking-tight sm:text-4xl">
               Built by Ajith Kumar, for engineers.
             </h2>

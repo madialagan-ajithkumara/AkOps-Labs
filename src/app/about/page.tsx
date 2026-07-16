@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
@@ -51,7 +52,24 @@ export default function AboutPage() {
       <section className="border-b border-hairline py-24">
         <Container>
           <div className="mx-auto max-w-3xl">
-            <SectionHeading eyebrow="Our Story" title="From consulting practice to full ecosystem." />
+            <div className="flex items-center gap-4">
+              <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-full border-4 border-accent-soft shadow-md">
+                <Image
+                  src="/founder.jpg"
+                  alt="Ajith Kumar, Founder of AkOps Labs"
+                  width={64}
+                  height={64}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-foreground">Ajith Kumar</p>
+                <p className="text-sm text-muted">Founder, AkOps Labs</p>
+              </div>
+            </div>
+            <div className="mt-8">
+              <SectionHeading eyebrow="Our Story" title="From consulting practice to full ecosystem." />
+            </div>
             <div className="mt-6 space-y-5 text-base leading-relaxed text-muted">
               <p>
                 AkOps Labs began as a single DevOps consulting practice, helping
