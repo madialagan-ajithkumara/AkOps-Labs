@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AkOps Labs — Terminal Sandbox (dev)</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/css/xterm.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!--
+    This is intentionally the simplest possible frontend: no build step,
+    no bundler, no framework — just xterm.js loaded from a CDN and plain
+    JS. That matches the "get one hardcoded session working end-to-end
+    first" instruction, and keeps the local docker-compose loop fast.
+
+    Porting this into the existing AkOps Labs Next.js site later is a
+    contained job: wrap the logic in app.js into a client component,
+    swap the CDN <script> tags for `import { Terminal } from "@xterm/xterm"`
+    (npm install @xterm/xterm @xterm/addon-fit), same wire protocol.
+  -->
+
+  <!-- Backend base URL — the only thing you need to change to point this
+       at a different host/port (e.g. the Oracle box instead of localhost). -->
+  <script>
+    window.AKOPS_API_BASE = "http://localhost:8080";
+  </script>
+</head>
+<body>
+  <header>
+    <h1>AkOps Labs — Terminal Sandbox <span class="badge">dev preview</span></h1>
+    <div id="timer" class="timer" hidden>Session expires in <strong id="timer-value">--:--</strong></div>
+  </header>
+
+  <main>
+    <div id="pre-start">
+      <p>
+        Click <strong>Start Lab</strong> to get a live Linux terminal,
+        sandboxed with gVisor, auto-destroyed after its TTL.
+      </p>
+      <button id="start-btn">Start Lab</button>
+      <p id="start-error" class="error" hidden></p>
+    </div>
+
+    <div id="terminal-wrap" hidden>
+      <div id="terminal"></div>
+      <div class="toolbar">
+        <button id="submit-btn">Submit: check /home/learner/tmp/hello exists</button>
+        <span id="submit-result"></span>
+      </div>
+    </div>
+
+    <div id="ended" hidden>
+      <p>Session ended. <button id="restart-btn">Start a new one</button></p>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@xterm/xterm@5.5.0/lib/xterm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@xterm/addon-fit@0.10.0/lib/addon-fit.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

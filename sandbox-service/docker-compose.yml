@@ -1,0 +1,46 @@
+# Local dev/test stack. This is NOT the Oracle production deployment —
+# see docs/GVISOR_SETUP.md for that. This compose file exists so you can
+# run the whole flow (start session -> get terminal -> type commands ->
+# session expires) on your own machine before touching the cloud box.
+#
+# Prerequisites (run once, before `docker compose up`):
+#   docker build -t akops-sandbox:latest ./sandbox-image
+#
+# RUNTIME defaults to "" (plain runc) here because most dev machines don't
+# have gVisor installed. On the Oracle box, set RUNTIME=runsc in .env —
+# nothing else in this file or the Go code changes.
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    environment:
+      LISTEN_ADDR: ":8080"
+      RUNTIME: "${RUNTIME:-}"
+      SANDBOX_IMAGE: "${SANDBOX_IMAGE:-akops-sandbox:latest}"
+      SESSION_TTL_SECONDS: "${SESSION_TTL_SECONDS:-1800}"
+      REAP_INTERVAL_SECONDS: "${REAP_INTERVAL_SECONDS:-20}"
+      MEMORY_LIMIT_MB: "${MEMORY_LIMIT_MB:-256}"
+      NANO_CPUS: "${NANO_CPUS:-500000000}"
+      PIDS_LIMIT: "${PIDS_LIMIT:-64}"
+      NETWORK_MODE: "${NETWORK_MODE:-none}"
+      MAX_CONCURRENT_PER_IP: "${MAX_CONCURRENT_PER_IP:-2}"
+      MAX_TOTAL_SESSIONS: "${MAX_TOTAL_SESSIONS:-40}"
+      CREATE_RATE_PER_IP: "${CREATE_RATE_PER_IP:-5}"
+      CREATE_RATE_WINDOW_SECONDS: "${CREATE_RATE_WINDOW_SECONDS:-600}"
+      TRUST_PROXY: "${TRUST_PROXY:-false}"
+      ALLOWED_ORIGINS: "${ALLOWED_ORIGINS:-http://localhost:8081}"
+    volumes:
+      # Sibling-container pattern: the backend talks to the HOST's Docker
+      # daemon over this socket to create learner containers. It does not
+      # run its own nested Docker daemon.
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+  frontend:
+    image: nginx:1.27-alpine
+    ports:
+      - "8081:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+    restart: unless-stopped
