@@ -5,7 +5,7 @@ export const siteConfig = {
   description:
     "AkOps Labs is a hands-on DevOps, Platform Engineering, AIOps, FinOps, Cloud, and Kubernetes learning platform — with enterprise consulting, an AI resume product, and a growing community.",
   resumeAiUrl: "https://akops-resume.vercel.app/",
-  youtubeUrl: "https://youtube.com/@akopstamil",
+  youtubeUrl: "https://www.youtube.com/@akopslabs",
   email: "hello@akopslabs.com",
   linkedin: "https://linkedin.com/company/akopslabs",
   github: "https://github.com/akopslabs",
