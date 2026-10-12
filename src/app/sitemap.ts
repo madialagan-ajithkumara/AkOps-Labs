@@ -8,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/resume-ai",
     "/academy",
     "/roadmaps",
+    "/pricing",
     "/playground",
     "/playground/games",
     "/playground/games/kubernetes",

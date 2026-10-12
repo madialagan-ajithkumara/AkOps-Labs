@@ -21,9 +21,42 @@ function norm(cmd: string): string {
   return cmd.trim().replace(/\s+/g, " ").toLowerCase();
 }
 
+// Common kubectl resource shorthand — real kubectl accepts all of these
+// interchangeably, so the sandbox should too instead of penalizing a
+// learner for typing valid kubectl. Applies both to bare tokens ("deploy")
+// and to "resource/name" tokens ("deploy/checkout-service").
+const RESOURCE_ALIASES: Record<string, string> = {
+  po: "pod",
+  pods: "pod",
+  deploy: "deployment",
+  deployments: "deployment",
+  svc: "service",
+  services: "service",
+  ns: "namespace",
+  namespaces: "namespace",
+  cm: "configmap",
+  configmaps: "configmap",
+};
+
+function canonicalizeToken(token: string): string {
+  const slashIdx = token.indexOf("/");
+  if (slashIdx === -1) {
+    return RESOURCE_ALIASES[token] ?? token;
+  }
+  const [resource, rest] = [token.slice(0, slashIdx), token.slice(slashIdx + 1)];
+  return `${RESOURCE_ALIASES[resource] ?? resource}/${rest}`;
+}
+
+function canonicalize(cmd: string): string {
+  return norm(cmd)
+    .split(" ")
+    .map(canonicalizeToken)
+    .join(" ");
+}
+
 export function isCommandCorrect(input: string, accept: string[]): boolean {
-  const n = norm(input);
-  return accept.some((a) => norm(a) === n);
+  const n = canonicalize(input);
+  return accept.some((a) => canonicalize(a) === n);
 }
 
 export const terminalScenarios: TerminalScenario[] = [

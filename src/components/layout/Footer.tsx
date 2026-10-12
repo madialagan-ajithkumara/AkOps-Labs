@@ -17,18 +17,15 @@ const columns = [
   {
     title: "Learn & Grow",
     links: [
-      { label: "AkOps Resume AI", href: "/resume-ai" },
-      { label: "AkOps Academy", href: "/academy" },
       { label: "Roadmaps", href: "/roadmaps" },
       { label: "Playground", href: "/playground" },
-      { label: "AkOps YouTube", href: "/youtube" },
     ],
   },
   {
     title: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Contact", href: "/contact" },
+      { label: "Pricing", href: "/pricing" },
     ],
   },
 ];

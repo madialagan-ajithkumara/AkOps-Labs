@@ -13,13 +13,10 @@ export const siteConfig = {
 
 export const mainNav = [
   { label: "Services", href: "/services" },
-  { label: "Resume AI", href: "/resume-ai" },
-  { label: "Academy", href: "/academy" },
   { label: "Roadmaps", href: "/roadmaps" },
   { label: "Playground", href: "/playground" },
-  { label: "YouTube", href: "/youtube" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Pricing", href: "/pricing" },
 ];
 
 export const services = [

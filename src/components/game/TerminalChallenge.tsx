@@ -76,8 +76,23 @@ export default function TerminalChallenge() {
         setStatus("scenario-complete");
       }
     } else {
-      setLog((l) => [...l, { kind: "cmd", text: cmd }, { kind: "error", text: "command not recognized — check the syntax and try again" }]);
-      setWrongCount((c) => c + 1);
+      const nextWrongCount = wrongCount + 1;
+      const message =
+        nextWrongCount >= 2
+          ? "still not it — here's a hint"
+          : "not quite — that may be valid kubectl, but it's not what this step is checking for yet";
+      const newLines: LogLine[] = [
+        { kind: "cmd", text: cmd },
+        { kind: "error", text: message },
+      ];
+      // Auto-surface the hint after 2 misses instead of making the learner
+      // hunt for the Hint button — three or four failed guesses at an exact
+      // string (a pod name, a flag) is frustrating, not instructive.
+      if (nextWrongCount === 2 && step) {
+        newLines.push({ kind: "hint", text: step.hint });
+      }
+      setLog((l) => [...l, ...newLines]);
+      setWrongCount(nextWrongCount);
       setInput("");
     }
   }

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Menu, X, Sparkles } from "lucide-react";
 import Container from "@/components/ui/Container";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { mainNav, siteConfig } from "@/lib/site-config";
+import { mainNav } from "@/lib/site-config";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -35,20 +35,12 @@ export default function Navbar() {
         <div className="hidden items-center gap-3 lg:flex">
           <ThemeToggle />
           <Link
-            href="/contact"
-            className="inline-flex items-center rounded-full border border-hairline px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-accent/40 hover:text-accent"
-          >
-            Get in touch
-          </Link>
-          <a
-            href={siteConfig.resumeAiUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/playground"
             className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-accent to-[#17b978] px-4 py-2 text-sm font-semibold text-white shadow-md shadow-accent/25 transition-all hover:shadow-lg hover:shadow-accent/35"
           >
             <Sparkles className="h-3.5 w-3.5" />
-            Try Resume AI
-          </a>
+            Start free
+          </Link>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
@@ -76,14 +68,13 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
-            <a
-              href={siteConfig.resumeAiUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/playground"
+              onClick={() => setOpen(false)}
               className="mt-2 rounded-lg bg-gradient-to-r from-accent to-[#17b978] px-3 py-2.5 text-center text-sm font-semibold text-white"
             >
-              Try Resume AI ↗
-            </a>
+              Start free
+            </Link>
           </Container>
         </div>
       )}
