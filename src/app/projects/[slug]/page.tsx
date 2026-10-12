@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
-import DownloadButton from "@/components/learn/DownloadButton";
+import { plans } from "@/lib/tracks";
 import { projects, getProject } from "@/lib/projects";
 import { ArrowLeft, Check } from "lucide-react";
 
@@ -47,16 +47,23 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
         </div>
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="card-surface rounded-2xl p-6" style={{ borderTop: `3px solid ${p.color}` }}>
-            <p className="text-2xl font-extrabold">Free</p>
-            <p className="mt-1 text-xs text-muted">with a free account</p>
-            <div className="mt-5">
-              <DownloadButton
-                url={p.downloadUrl}
-                next={`/projects/${p.slug}`}
-                color={p.color}
-                disabled={p.status === "coming-soon"}
-              />
-            </div>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted">Included in</p>
+            <ul className="mt-2 space-y-1.5">
+              {plans.filter((pl) => pl.id !== "devops").map((pl) => (
+                <li key={pl.id} className="flex items-center justify-between text-sm">
+                  <span className="font-semibold">{pl.name}</span>
+                  <span className="text-muted">${pl.yearly.toFixed(2)}/mo</span>
+                </li>
+              ))}
+            </ul>
+            {/* TODO: once payments exist, show <DownloadButton /> here for active Project/Pro members. */}
+            <Link
+              href="/pricing"
+              className="mt-5 block rounded-full px-6 py-3 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ background: p.color }}
+            >
+              {p.status === "coming-soon" ? "See plans (coming soon)" : "Get project access"}
+            </Link>
           </div>
         </aside>
       </div>

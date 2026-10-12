@@ -20,7 +20,7 @@ export default function ProjectsPage() {
             Real end-to-end projects you can download.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-muted">
-            Full source, configs and a guide for each. Free with an account, and great for your portfolio.
+            Full source, configs and a guide for each. Included in the Project and Pro plans, and great for your portfolio.
           </p>
         </Container>
       </section>

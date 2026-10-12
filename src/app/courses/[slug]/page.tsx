@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
-import { tracksForCourse, trackById } from "@/lib/tracks";
+import { plans } from "@/lib/tracks";
 import { courses, getCourse } from "@/lib/courses";
 import { ArrowLeft, Check, Clock, PlayCircle } from "lucide-react";
 
@@ -65,10 +65,9 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
           <div className="card-surface rounded-2xl p-6" style={{ borderTop: `3px solid ${c.color}` }}>
             <p className="text-xs font-bold uppercase tracking-widest text-muted">Included in</p>
             <ul className="mt-2 space-y-1.5">
-              {tracksForCourse(c).map((id) => {
-                const t = trackById(id);
+              {plans.filter((t) => t.id !== "project").map((t) => {
                 return (
-                  <li key={id} className="flex items-center justify-between text-sm">
+                  <li key={t.id} className="flex items-center justify-between text-sm">
                     <span className="font-semibold">{t.name}</span>
                     <span className="text-muted">${t.yearly.toFixed(2)}/mo</span>
                   </li>

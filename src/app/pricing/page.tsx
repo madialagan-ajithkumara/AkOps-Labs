@@ -5,7 +5,7 @@ import PricingTracks from "@/components/ui/PricingTracks";
 
 export const metadata: Metadata = {
   title: "Pricing — AkOps Labs",
-  description: "Pick your track: DevOps, Cloud, Kubernetes, or Pro. The first topic of every skill is free.",
+  description: "Three plans under $5/month: DevOps, Project and Pro.",
 };
 
 const steps = [
@@ -23,7 +23,7 @@ export default function PricingPage() {
           <div className="blob blob-sky" />
         </div>
         <Container className="relative py-20">
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">Pick your track.</h1>
+          <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl">Pick your plan.</h1>
           <p className="mt-4 max-w-2xl text-lg text-muted">
             You learn by doing: short lessons, then real practice in your browser.
           </p>
@@ -39,8 +39,8 @@ export default function PricingPage() {
           </div>
 
           <div className="mt-6 rounded-2xl border border-dashed border-hairline px-6 py-4 text-sm">
-            <span className="font-bold">The first topic of every skill is free.</span>{" "}
-            <span className="text-muted">See exactly how a lesson and lab work before you pay. </span>
+            <span className="font-bold">Start free.</span>{" "}
+            <span className="text-muted">Try the Playground labs before you pay. </span>
             <Link href="/playground" className="font-semibold text-accent underline underline-offset-4">
               Try one free →
             </Link>
@@ -51,7 +51,7 @@ export default function PricingPage() {
       <section className="py-16">
         <Container>
           <PricingTracks />
-          <p className="mt-8 text-center text-xs text-muted">USD per month. Courses and labs are included in your track. Projects are separate: always free with an account. Prices may change before launch.</p>
+          <p className="mt-8 text-center text-xs text-muted">USD per month. Pro includes everything in DevOps and Project, plus personal help from Ajith. Prices may change before launch.</p>
         </Container>
       </section>
     </>

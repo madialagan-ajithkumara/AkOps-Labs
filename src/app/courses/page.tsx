@@ -3,7 +3,7 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Badge from "@/components/ui/Badge";
 import { courses } from "@/lib/courses";
-import { tracks, tracksForCourse, trackById } from "@/lib/tracks";
+import { planById } from "@/lib/tracks";
 import { Clock, PlayCircle } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function CoursesPage() {
-  const groups = tracks.filter((t) => t.id !== "pro");
+  const t = planById("devops");
   return (
     <>
       <section className="border-b border-hairline py-20 text-center">
@@ -22,56 +22,39 @@ export default function CoursesPage() {
             End-to-end DevOps courses, built for beginners.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg text-muted">
-            Every course is included in a track from under $5/month. Projects are always free.
+            All courses are included in the DevOps plan (from ${t.yearly.toFixed(2)}/month) and in Pro.
           </p>
           <Link href="/pricing" className="mt-8 inline-block rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white">
-            See tracks &amp; pricing
+            See plans &amp; pricing
           </Link>
         </Container>
       </section>
       <section className="py-16">
-        <Container className="space-y-14">
-          {groups.map((t) => {
-            const list = courses.filter((c) => c.track === t.id);
-            if (!list.length) return null;
-            return (
-              <div key={t.id}>
-                <div className="flex items-end justify-between border-b border-hairline pb-3">
-                  <h2 className="text-2xl font-extrabold tracking-tight">
-                    <span className="mr-2 font-mono text-xs uppercase tracking-widest" style={{ color: t.color }}>Track {t.number}</span>
-                    {t.name}
-                  </h2>
-                  <span className="text-sm text-muted">from ${t.yearly.toFixed(2)}/mo</span>
+        <Container>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {courses.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/courses/${c.slug}`}
+                className="card-surface flex flex-col rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg"
+                style={{ borderTop: `3px solid ${c.color}` }}
+              >
+                <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wide">
+                  <span style={{ color: c.color }}>{c.level}</span>
+                  {c.status === "coming-soon" && <span className="rounded-full bg-tint px-2 py-0.5 text-muted">Coming soon</span>}
                 </div>
-                <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {list.map((c) => (
-                    <Link
-                      key={c.slug}
-                      href={`/courses/${c.slug}`}
-                      className="card-surface flex flex-col rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg"
-                      style={{ borderTop: `3px solid ${t.color}` }}
-                    >
-                      <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wide">
-                        <span style={{ color: t.color }}>{c.level}</span>
-                        {c.status === "coming-soon" && <span className="rounded-full bg-tint px-2 py-0.5 text-muted">Coming soon</span>}
-                      </div>
-                      <h3 className="mt-3 text-xl font-extrabold tracking-tight">{c.title}</h3>
-                      <p className="mt-2 flex-1 text-sm text-muted">{c.tagline}</p>
-                      <div className="mt-5 flex items-center justify-between text-sm">
-                        <span className="flex items-center gap-1.5 text-muted"><Clock className="h-4 w-4" /> {c.hours}h video</span>
-                        <span className="text-xs font-semibold text-muted">
-                          In {tracksForCourse(c).length === 4 ? "all tracks" : tracksForCourse(c).map((id) => trackById(id).name).join(" & ")}
-                        </span>
-                      </div>
-                      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: t.color }}>
-                        <PlayCircle className="h-4 w-4" /> View course
-                      </span>
-                    </Link>
-                  ))}
+                <h3 className="mt-3 text-xl font-extrabold tracking-tight">{c.title}</h3>
+                <p className="mt-2 flex-1 text-sm text-muted">{c.tagline}</p>
+                <div className="mt-5 flex items-center justify-between text-sm">
+                  <span className="flex items-center gap-1.5 text-muted"><Clock className="h-4 w-4" /> {c.hours}h video</span>
+                  <span className="text-xs font-semibold text-muted">DevOps &amp; Pro</span>
                 </div>
-              </div>
-            );
-          })}
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: c.color }}>
+                  <PlayCircle className="h-4 w-4" /> View course
+                </span>
+              </Link>
+            ))}
+          </div>
         </Container>
       </section>
     </>

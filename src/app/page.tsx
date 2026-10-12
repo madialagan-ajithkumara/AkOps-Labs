@@ -78,7 +78,7 @@ export default function Home() {
                 <p className="mt-2 flex-1 text-sm text-muted">{c.tagline}</p>
                 <div className="mt-4 flex items-center justify-between text-sm">
                   <span className="flex items-center gap-1.5 text-muted"><Clock className="h-4 w-4" /> {c.hours}h</span>
-                  <span className="text-xs font-semibold text-muted">Included in tracks</span>
+                  <span className="text-xs font-semibold text-muted">Included in DevOps plan</span>
                 </div>
               </Link>
             ))}
@@ -103,7 +103,7 @@ export default function Home() {
                 <h3 className="mt-2 text-lg font-extrabold">{p.title}</h3>
                 <p className="mt-2 flex-1 text-sm text-muted">{p.summary}</p>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: p.color }}>
-                  <Download className="h-4 w-4" /> Free with an account
+                  <Download className="h-4 w-4" /> Included in Project plan
                 </span>
               </Link>
             ))}

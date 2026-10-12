@@ -3,7 +3,29 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Check, Clock } from "lucide-react";
-import { tracks, ownCourses, discountPct } from "@/lib/tracks";
+import { plans, discountPct, type PlanId } from "@/lib/tracks";
+import { courses } from "@/lib/courses";
+import { projects } from "@/lib/projects";
+
+type Item = { text: string; soon?: boolean; bold?: boolean };
+
+function itemsFor(id: PlanId): Item[] {
+  const courseItems: Item[] = courses.map((c) => ({ text: c.title, soon: c.status === "coming-soon" }));
+  const projectItems: Item[] = projects.map((p) => ({ text: p.title, soon: p.status === "coming-soon" }));
+  if (id === "devops") {
+    return [...courseItems, { text: "Hands-on Playground labs" }, { text: "Daily tasks & XP" }, { text: "Completion certificates" }];
+  }
+  if (id === "project") {
+    return [...projectItems, { text: "Full source code, configs & guides" }, { text: "New projects added regularly" }];
+  }
+  return [
+    { text: "Everything in DevOps (Plan 01)", bold: true },
+    { text: "Everything in Project (Plan 02)", bold: true },
+    { text: "Personal help from Ajith, ask anytime", bold: true },
+    { text: "Career guidance & project reviews" },
+    { text: "Complete platform access" },
+  ];
+}
 
 export default function PricingTracks() {
   const [yearly, setYearly] = useState(true);
@@ -24,65 +46,52 @@ export default function PricingTracks() {
         ))}
       </div>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {tracks.map((t) => {
-          const price = yearly ? t.yearly : t.monthly;
-          const courseList = ownCourses(t.id).filter((c) => c.status === "available");
-          const head = t.extras.filter((f) => f.startsWith("Everything"));
-          const tail = t.extras.filter((f) => !f.startsWith("Everything"));
-          const soonCourses = ownCourses(t.id).filter((c) => c.status === "coming-soon").map((c) => c.title);
+      <div className="mt-8 grid gap-6 md:grid-cols-3">
+        {plans.map((p) => {
+          const price = yearly ? p.yearly : p.monthly;
           return (
-            <div key={t.id} className="card-surface flex flex-col rounded-2xl p-6" style={{ borderTop: `3px solid ${t.color}` }}>
-              <p className="font-mono text-xs font-bold uppercase tracking-widest" style={{ color: t.color }}>
-                Track {t.number}
-                {t.id === "pro" ? " · All of it" : ""}
+            <div key={p.id} className="card-surface flex flex-col rounded-2xl p-6" style={{ borderTop: `3px solid ${p.color}` }}>
+              <p className="font-mono text-xs font-bold uppercase tracking-widest" style={{ color: p.color }}>
+                Plan {p.number}
+                {p.id === "pro" ? " · All of it" : ""}
               </p>
-              <h3 className="mt-2 text-2xl font-extrabold tracking-tight">{t.name}</h3>
+              <h3 className="mt-2 text-2xl font-extrabold tracking-tight">{p.name}</h3>
               {yearly && (
-                <span className="mt-2 inline-block w-fit rounded-full border px-2.5 py-0.5 font-mono text-[11px] font-bold uppercase" style={{ color: t.color, borderColor: `${t.color}66` }}>
-                  {discountPct(t)}% off yearly
+                <span className="mt-2 inline-block w-fit rounded-full border px-2.5 py-0.5 font-mono text-[11px] font-bold uppercase" style={{ color: p.color, borderColor: `${p.color}66` }}>
+                  {discountPct(p)}% off yearly
                 </span>
               )}
-              <p className="mt-3 text-sm leading-relaxed text-muted">{t.tagline}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{p.tagline}</p>
 
               <div className="mt-5 flex items-baseline gap-2">
-                {yearly && <span className="text-sm text-muted line-through">${t.monthly.toFixed(2)}</span>}
+                {yearly && <span className="text-sm text-muted line-through">${p.monthly.toFixed(2)}</span>}
                 <span className="text-4xl font-extrabold tracking-tight">${price.toFixed(2)}</span>
                 <span className="text-sm text-muted">/mo</span>
               </div>
               <p className="mt-1 text-xs text-muted">
-                {yearly ? `Billed $${(t.yearly * 12).toFixed(2)} for 12 months` : "Billed monthly, cancel anytime"}
+                {yearly ? `Billed $${(p.yearly * 12).toFixed(2)} for 12 months` : "Billed monthly, cancel anytime"}
               </p>
 
               <ul className="mt-5 flex-1 space-y-2.5">
-                {head.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm font-semibold text-foreground">
-                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0" style={{ color: t.color }} /> {f}
-                  </li>
-                ))}
-                {courseList.map((c) => (
-                  <li key={c.slug} className="flex items-start gap-2.5 text-sm text-foreground">
-                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0" style={{ color: t.color }} /> {c.title}
-                  </li>
-                ))}
-                {[...soonCourses, ...t.comingSoon].map((c) => (
-                  <li key={c} className="flex items-start gap-2.5 text-sm text-muted">
-                    <Clock className="mt-0.5 h-4 w-4 flex-shrink-0" /> {c} — coming soon
-                  </li>
-                ))}
-                {tail.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-foreground">
-                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0" style={{ color: t.color }} /> {f}
+                {itemsFor(p.id).map((it) => (
+                  <li key={it.text} className={`flex items-start gap-2.5 text-sm ${it.soon ? "text-muted" : "text-foreground"} ${it.bold ? "font-semibold" : ""}`}>
+                    {it.soon ? (
+                      <Clock className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                    ) : (
+                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0" style={{ color: p.color }} />
+                    )}
+                    {it.text}
+                    {it.soon ? " — coming soon" : ""}
                   </li>
                 ))}
               </ul>
 
               <Link
-                href={`/login?next=/pricing`}
+                href="/login?next=/pricing"
                 className="mt-6 inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                style={{ background: t.color }}
+                style={{ background: p.color }}
               >
-                Get {t.name}
+                Get {p.name}
               </Link>
             </div>
           );

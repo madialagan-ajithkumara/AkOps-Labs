@@ -1,4 +1,4 @@
-// Courses are included in subscription tracks (see src/lib/tracks.ts) — no per-course prices.
+// Courses are included in subscription tracks (see src/lib/tracks.ts: DevOps and Pro plans) — no per-course prices.
 // PLACEHOLDER catalog — replace titles, prices, lessons and video IDs with your real content.
 // `videoId` is left empty until you decide on a host (Bunny/Vimeo/YouTube); the course
 // page shows a video slot that will use it.
@@ -8,7 +8,6 @@ export type Course = {
   tagline: string;
   level: "Beginner" | "Intermediate";
   hours: number;
-  track: "devops" | "cloud" | "kubernetes";
   color: string;
   outcomes: string[];
   modules: { title: string; lessons: string[] }[];
@@ -19,7 +18,6 @@ export type Course = {
 export const courses: Course[] = [
   {
     slug: "kubernetes-end-to-end",
-    track: "kubernetes",
     title: "Kubernetes End-to-End",
     tagline: "From your first pod to a production-ready cluster.",
     level: "Beginner",
@@ -35,7 +33,6 @@ export const courses: Course[] = [
   },
   {
     slug: "aws-for-devops",
-    track: "cloud",
     title: "AWS for DevOps",
     tagline: "The AWS services every DevOps engineer actually uses.",
     level: "Beginner",
@@ -50,7 +47,6 @@ export const courses: Course[] = [
   },
   {
     slug: "cicd-end-to-end",
-    track: "devops",
     title: "CI/CD End-to-End",
     tagline: "Build, test and ship with Git, Jenkins and GitHub Actions.",
     level: "Beginner",
@@ -65,7 +61,6 @@ export const courses: Course[] = [
   },
   {
     slug: "linux-docker-basics",
-    track: "devops",
     title: "Linux & Docker Basics",
     tagline: "The foundation every DevOps path starts with.",
     level: "Beginner",
@@ -77,7 +72,6 @@ export const courses: Course[] = [
   },
   {
     slug: "terraform-iac",
-    track: "cloud",
     title: "Terraform & Infrastructure as Code",
     tagline: "Provision cloud infrastructure from code.",
     level: "Intermediate",
