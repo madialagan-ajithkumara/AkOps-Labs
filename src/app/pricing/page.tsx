@@ -51,7 +51,7 @@ export default function PricingPage() {
       <section className="py-16">
         <Container>
           <PricingTracks />
-          <p className="mt-8 text-center text-xs text-muted">USD. Prices shown are placeholders and may change before launch.</p>
+          <p className="mt-8 text-center text-xs text-muted">USD per month. Courses and labs are included in your track. Projects are separate: always free with an account. Prices may change before launch.</p>
         </Container>
       </section>
     </>

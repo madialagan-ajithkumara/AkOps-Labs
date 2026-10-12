@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Container from "@/components/ui/Container";
-import BuyButton from "@/components/learn/BuyButton";
+import { tracksForCourse, trackById } from "@/lib/tracks";
 import { courses, getCourse } from "@/lib/courses";
 import { ArrowLeft, Check, Clock, PlayCircle } from "lucide-react";
 
@@ -63,15 +63,25 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="card-surface rounded-2xl p-6" style={{ borderTop: `3px solid ${c.color}` }}>
-            <p className="text-4xl font-extrabold">₹{c.priceInr}</p>
-            <p className="mt-1 text-xs text-muted">≈ ${c.priceUsd} · one-time payment, lifetime access</p>
-            <div className="mt-5">
-              <BuyButton
-                label={c.status === "coming-soon" ? "Coming soon" : "Buy this course"}
-                color={c.color}
-                disabled={c.status === "coming-soon"}
-              />
-            </div>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted">Included in</p>
+            <ul className="mt-2 space-y-1.5">
+              {tracksForCourse(c).map((id) => {
+                const t = trackById(id);
+                return (
+                  <li key={id} className="flex items-center justify-between text-sm">
+                    <span className="font-semibold">{t.name}</span>
+                    <span className="text-muted">${t.yearly.toFixed(2)}/mo</span>
+                  </li>
+                );
+              })}
+            </ul>
+            <Link
+              href="/pricing"
+              className="mt-5 block rounded-full px-6 py-3 text-center text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ background: c.color }}
+            >
+              {c.status === "coming-soon" ? "See tracks (coming soon)" : "Get access"}
+            </Link>
             <p className="mt-5 flex items-center gap-2 text-sm text-muted"><Clock className="h-4 w-4" /> {c.hours} hours of video</p>
           </div>
         </aside>
