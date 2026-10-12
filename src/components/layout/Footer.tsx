@@ -17,8 +17,10 @@ const columns = [
   {
     title: "Learn & Grow",
     links: [
-      { label: "Roadmaps", href: "/roadmaps" },
+      { label: "Video Courses", href: "/courses" },
+      { label: "Projects", href: "/projects" },
       { label: "Playground", href: "/playground" },
+      { label: "Roadmaps", href: "/roadmaps" },
     ],
   },
   {

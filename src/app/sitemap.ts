@@ -1,40 +1,24 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, playgroundGames } from "@/lib/site-config";
+import { courses } from "@/lib/courses";
+import { projects } from "@/lib/projects";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
-    "/services",
-    "/resume-ai",
-    "/academy",
-    "/roadmaps",
-    "/pricing",
+    "/courses",
+    ...courses.map((c) => `/courses/${c.slug}`),
+    "/projects",
+    ...projects.map((p) => `/projects/${p.slug}`),
     "/playground",
-    "/playground/games",
-    "/playground/games/kubernetes",
-    "/playground/games/aws",
-    "/playground/games/azure",
-    "/playground/games/cicd",
-    "/playground/games/iac",
     "/playground/tasks",
     "/playground/progress",
-    "/playground/pipeline-speed-run",
-    "/playground/terminal-challenge",
-    "/playground/trivia-quiz",
-    "/playground/memory-match",
-    "/playground/config-debug",
-    "/playground/yaml-battle",
-    "/playground/command-ninja",
-    "/playground/terraform-escape-room",
-    "/playground/aws-cost-detective",
-    "/playground/incident-commander",
-    "/playground/cicd-simulator",
-    "/playground/architecture-builder",
-    "/playground/k8s-troubleshooting-room",
-    "/playground/ai-interview-arena",
-    "/youtube",
+    ...playgroundGames.map((g) => `/playground/${g.slug}`),
+    "/roadmaps",
+    "/pricing",
+    "/services",
     "/about",
-    "/contact",
+    "/login",
   ];
   return routes.map((route) => ({
     url: `${siteConfig.url}${route}`,

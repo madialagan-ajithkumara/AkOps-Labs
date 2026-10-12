@@ -102,7 +102,7 @@ export default function RoadmapsPage() {
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
             {[
               "No wasted time on the wrong topic at the wrong stage",
-              "Each roadmap maps directly to AkOps Academy programs",
+              "Each roadmap maps to our video courses and projects",
               "Backed by AkOps Resume AI to turn skills into interviews",
             ].map((item) => (
               <Card key={item}>
@@ -112,7 +112,7 @@ export default function RoadmapsPage() {
             ))}
           </div>
           <div className="mt-12 flex justify-center">
-            <Button href="/academy">Explore Academy programs</Button>
+            <Button href="/courses">Explore video courses</Button>
           </div>
         </Container>
       </section>

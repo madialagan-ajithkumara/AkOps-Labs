@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function BugSquashRedirect() {
-  redirect("/playground/terminal-challenge");
+export default function Removed() {
+  redirect("/playground");
 }

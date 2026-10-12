@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import XpToast from "@/components/ui/XpToast";
+import { AuthProvider } from "@/components/auth/AuthProvider";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -19,10 +20,10 @@ export const metadata: Metadata = {
     "Platform Engineering",
     "FinOps",
     "AIOps",
-    "AkOps Resume AI",
-    "AkOps Academy",
-    "AI Resume Builder",
-    "ATS Score",
+    "Learn DevOps",
+    "Kubernetes course",
+    "AWS course",
+    "CI/CD projects",
   ],
   openGraph: {
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
@@ -57,10 +58,12 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-foreground antialiased font-sans" suppressHydrationWarning>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <XpToast />
+        <AuthProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <XpToast />
+        </AuthProvider>
       </body>
     </html>
   );
